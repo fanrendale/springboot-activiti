@@ -39,12 +39,13 @@ public class PersonController extends BaseController {
      */
     @GetMapping("/list")
     public Object list(@RequestParam("pageNum") Integer pageNum, @RequestParam("pageSize") Integer pageSize){
+        log.info("测试info级别日志");
+        log.warn("测试warn级别日志");
+        log.error("测试error级别日志");
+
         log.info("========================查询所有用户===开始：参数:param[pageNum:{}, pageSize:{}]=============================", JSON.toJSONString(pageNum), JSON.toJSONString(pageSize));
         Page<Person> page = new Page<>(pageNum, pageSize);
         IPage<Person> iPage = personService.page(page);
-//        List<Person> personList = personService.list();
-
-//        personList.forEach(System.out::println);
 
         log.info("========================查询所有用户===结束=============================");
         return iPage;
