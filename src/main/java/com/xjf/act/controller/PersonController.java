@@ -4,6 +4,7 @@ package com.xjf.act.controller;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.xjf.act.core.exception.BusinessException;
 import com.xjf.act.entity.Person;
 import com.xjf.act.service.PersonService;
 import lombok.extern.slf4j.Slf4j;
@@ -39,6 +40,11 @@ public class PersonController extends BaseController {
      */
     @GetMapping("/list")
     public Object list(@RequestParam("pageNum") Integer pageNum, @RequestParam("pageSize") Integer pageSize){
+        if (true) {
+//            throw new BusinessException("测试业务异常");
+            throw new IndexOutOfBoundsException("数组越界");
+        }
+
         log.info("测试info级别日志");
         log.warn("测试warn级别日志");
         log.error("测试error级别日志");
