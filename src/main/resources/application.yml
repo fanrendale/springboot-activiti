@@ -41,3 +41,5 @@ logging:
   file:
     # 日志输出的地址：Spring Boot默认并没有进行文件输出，只在控制台中进行了打印
     name: /log
+
+

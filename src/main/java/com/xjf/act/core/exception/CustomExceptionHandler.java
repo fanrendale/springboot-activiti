@@ -1,5 +1,7 @@
 package com.xjf.act.core.exception;
 
+import com.xjf.act.core.response.ReturnMsg;
+import com.xjf.act.core.response.ReturnResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -39,6 +41,21 @@ public class CustomExceptionHandler {
 
         e.printStackTrace();
 
-        return e.getMessage();
+        return ReturnResult.error(e.getMessage(),ReturnMsg.EXCEPTION5.getCode(), e.getMessage());
+
+    }
+
+    /**
+     * 捕获流程参数异常
+     * @param e
+     * @return
+     */
+    @ExceptionHandler(ProcessParamException.class)
+    public Object handleProcessParamException(ProcessParamException e){
+        log.error("流程参数异常:{}", e.getMessage(),e);
+        e.printStackTrace();
+
+        return ReturnResult.error(e.getMessage(), ReturnMsg.EXCEPTION5.getCode(), e.getMessage());
+
     }
 }
