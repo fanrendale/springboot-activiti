@@ -27,12 +27,16 @@ public class ActivitiConfig {
         Resource[] resources = new PathMatchingResourcePatternResolver().getResources(ResourceLoader.CLASSPATH_URL_PREFIX + "processes/*.bpmn");
         configuration.setTransactionManager(transactionManager);
         configuration.setDataSource(dataSource);
-//        configuration.setDatabaseSchemaUpdate("true");
+        configuration.setDatabaseSchemaUpdate("true");
         //删除activiti的表重新创建
-        configuration.setDatabaseSchemaUpdate("drop-create");
+//        configuration.setDatabaseSchemaUpdate("drop-create");
         configuration.setDeploymentResources(resources);
         //该语句禁用用户相关的表
 //        configuration.setDbIdentityUsed(false);
+        //设置生成的流程图为中文
+        configuration.setLabelFontName("宋体");
+        configuration.setActivityFontName("宋体");
+        configuration.setAnnotationFontName("宋体");
         return configuration.buildProcessEngine();
     }
 
