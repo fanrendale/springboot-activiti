@@ -15,6 +15,11 @@ import java.util.Objects;
 public class ProcessParam {
 
     /**
+     * 候选人变量名称
+     */
+    private String candidateVariableName;
+
+    /**
      * 流程定义的key，bpmn文件的id
      */
     private String processDefinitionKey;
@@ -23,6 +28,11 @@ public class ProcessParam {
      * 业务键，流程关联业务
      */
     private String businessKey;
+
+    /**
+     * 业务类型
+     */
+    private String businessType;
 
     /**
      * 流程变量
@@ -63,6 +73,11 @@ public class ProcessParam {
      * 反馈意见
      */
     private String feedback;
+
+    /**
+     * 代理人
+     */
+    private String assignee;
 
     /**
      * 分页起始页: activiti的起始页为0

@@ -3,6 +3,9 @@ package com.xjf.act.service;
 import com.xjf.act.dto.param.ProcessParam;
 import com.xjf.act.dto.response.ProcessHistoryResponse;
 import com.xjf.act.dto.response.ProcessResponse;
+import com.xjf.act.entity.WorkFlow;
+import com.xjf.act.entity.WorkFlowStep;
+import org.activiti.engine.history.HistoricTaskInstance;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
 
@@ -34,6 +37,7 @@ public interface ProcessService {
      * 参数：userId：用户ID
      *      pageNum：分页起始页
      *      pageSize：分页容量
+     *      processDefinitionKey:流程定义key，以此来分类查询
      *
      * @param param
      * @return
@@ -148,4 +152,51 @@ public interface ProcessService {
      */
     String getLastTaskAssignee(String userId, String taskId);
 
+    /**
+     * 新增用户自定义流程
+     *
+     * @param workFlow 自定义流程描述
+     * @param stepList 自定义流程步骤
+     */
+    void addProcessDeployment(WorkFlow workFlow, List<WorkFlowStep> stepList);
+
+    /**
+     * 根据任务ID查询任务
+     * @param taskId
+     * @return
+     */
+    Task getTaskById(String taskId);
+
+    /**
+     * 根据任务ID和变量名获取变量
+     *
+     * @param id
+     * @param candidateVariableName
+     * @return
+     */
+    Object getVariableByVarName(String id, String candidateVariableName);
+
+    /**
+     * 根据流程实例ID终止流程（挂起）
+     *
+     * @param processInstanceId 流程实例ID
+     */
+    void suspendProcessInstanceById(String processInstanceId);
+
+    /**
+     * 给任务设置候选人
+     *
+     * @param taskId 任务ID
+     * @param userId 用户ID
+     */
+    void addCandidateUser(String taskId, String userId);
+
+
+    /**
+     * 查询流程进度
+     *
+     * @param processInstanceId
+     * @return
+     */
+    List<HistoricTaskInstance> processStatus(String processInstanceId);
 }
